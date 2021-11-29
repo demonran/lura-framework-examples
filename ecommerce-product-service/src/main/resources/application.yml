@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: ecommerce-product-service
+server:
+  port: 8081
