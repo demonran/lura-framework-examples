@@ -14,6 +14,9 @@ repositories {
 dependencies {
     implementation 'me.luraframework:lura-framework-spring-boot-starter:1.0-SNAPSHOT'
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'com.plumelog:plumelog-logback:3.5.1'
+    implementation 'com.plumelog:plumelog-trace:3.5.1'
+    implementation 'com.plumelog:plumelog-http:3.5.1'
 }
 
 compileKotlin {

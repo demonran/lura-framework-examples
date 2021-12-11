@@ -6,14 +6,16 @@ plugins {
 group 'me.luraframework.examples'
 version '1.0-SNAPSHOT'
 
-repositories {
-    mavenLocal()
-    mavenCentral()
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+    }
 }
 
 dependencies {
-    implementation 'me.luraframework:lura-framework-spring-boot-starter:1.0-SNAPSHOT'
+    implementation('io.github.luraframework:lura-framework-spring-boot-starter:0.0.2-SNAPSHOT'){ changing = true }
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation 'com.plumelog:plumelog-trace:3.5.1'
 }
 
 compileKotlin {

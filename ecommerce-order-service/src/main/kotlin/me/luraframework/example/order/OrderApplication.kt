@@ -1,5 +1,6 @@
 package me.luraframework.example.order
 
+import com.plumelog.http.restTemplate.PlumelogRestTemplateInterceptor
 import me.luraframework.boot.LuraFramework
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -11,12 +12,12 @@ import org.springframework.web.client.RestTemplate
 @LuraFramework
 class Application {
 
-  private var log: Logger = LoggerFactory.getLogger(Application::class.java)
-
   @Bean
   @LoadBalanced
   fun restTemplate(): RestTemplate {
-    return RestTemplate()
+    val restTemplate = RestTemplate()
+    restTemplate.interceptors.add(PlumelogRestTemplateInterceptor())
+    return restTemplate
   }
 }
 
