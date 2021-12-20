@@ -8,7 +8,7 @@
       </template>
       <el-form>
         <el-form-item >
-          <el-input v-model="form.name" placeholder="账号"></el-input>
+          <el-input v-model="form.username" placeholder="账号"></el-input>
         </el-form-item>
         <el-form-item >
           <el-input v-model="form.password" placeholder="密码"></el-input>
