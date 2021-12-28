@@ -3,8 +3,8 @@ import {ElNotification} from 'element-plus'
 // 创建axios实例
 
 const service = axios.create({
-    baseURL: process.env.NODE_ENV === 'development' ? import.meta.env.VITE_APP_BASE_API : '/', // api 的 base_url
-    timeout: 3000 // 请求超时时间
+    baseURL:  '/', // api 的 base_url
+    timeout: 30000 // 请求超时时间
 })
 
 service.interceptors.response.use(response => {

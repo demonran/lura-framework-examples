@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import Background from '/@/assets/background.jpg'
-import { login } from '/@/api/login.js'
+import Background from '@/assets/background.jpg'
+import { login } from '@/api/login.js'
 export default {
   name: "login",
   data() {
@@ -37,7 +37,8 @@ export default {
   methods: {
     handleLogin() {
       login(this.form).then(res => {
-        console.log(res)
+        localStorage.setItem("token", res)
+        this.$router.push('/')
       })
     }
   }
