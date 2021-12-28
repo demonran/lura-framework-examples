@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import Background from '/@/assets/background.jpg'
-import { register } from '/@/api/register.js'
+import Background from '@/assets/background.jpg'
+import { register } from '@/api/register.js'
 export default {
   name: "register",
   data() {
