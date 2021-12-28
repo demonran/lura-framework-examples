@@ -39,9 +39,11 @@ export default {
   },
   methods: {
     handleRegister() {
-      register(this.form).then(res => {
-        console.log(res)
-      })
+      if(this.form.password === this.form.confirm ) {
+        register(this.form).then(res => {
+          console.log(res)
+        })
+      }
     }
   }
 }
