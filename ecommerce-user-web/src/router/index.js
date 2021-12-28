@@ -18,6 +18,22 @@ const routes = [
         name: 'home',
         component: () => import(/* webpackChunkName: "login" */ '@/pages/home.vue')
     },
+
+    {
+        path: '/shop',
+        name: 'Shop',
+        component: () => import('@/layout/shop/shop-layout.vue'),
+        children: [{
+            path: 'login',
+            name: 'ShopLogin',
+            component: () => import('@/pages/shop/login.vue'),
+        },{
+            path: 'product',
+            name: 'ShopProduct',
+            component: () => import('@/pages/shop/product/index.vue'),
+        },
+        ]
+    },
 ]
 
 export default createRouter({
