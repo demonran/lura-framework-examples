@@ -1,0 +1,13 @@
+FROM node:12 as builder
+WORKDIR /app
+# 提前安装依赖， 避免每次安装依赖花很久时间
+# 只要 package.json 不修改就会用 docker cache
+COPY package.json /app
+RUN yarn install
+
+ADD . /app
+RUN yarn build
+
+FROM nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY nginx/default.conf /etc/nginx/conf.d
