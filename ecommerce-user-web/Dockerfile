@@ -1,4 +1,4 @@
-FROM node:12 as builder
+FROM node:15 as builder
 WORKDIR /app
 # 提前安装依赖， 避免每次安装依赖花很久时间
 # 只要 package.json 不修改就会用 docker cache

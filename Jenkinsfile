@@ -9,7 +9,6 @@ pipeline {
     }
 
    environment {
-           PROJECT = "${params.project}"
            DOCKER_REG = "registry.cn-chengdu.aliyuncs.com/lura"
            DOCKER_REPOSITORY = "${DOCKER_REG}/${PROJECT}"
            DOCKER_IMAGE = "${DOCKER_REPOSITORY}:build-${BUILD_NUMBER}"
@@ -31,7 +30,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'envsubst < deployment.yml | sudo kubectl apply -f -'
+                sh "export PROJECT=${params.project} && envsubst < deployment.yml | sudo kubectl apply -f -"
 
            }
         }
