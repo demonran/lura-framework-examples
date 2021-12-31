@@ -18,5 +18,6 @@ data class Product(
   val cover: String,
   val stock: Long,
   val price: BigDecimal,
-  val status: String
+  val status: String,
+  val shopId: Long
 )

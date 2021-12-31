@@ -9,7 +9,7 @@ pipeline {
     }
 
    environment {
-           PROJECT = ${params.project}
+           PROJECT = "${params.project}"
            DOCKER_REG = "registry.cn-chengdu.aliyuncs.com/lura"
            DOCKER_REPOSITORY = "${DOCKER_REG}/${PROJECT}"
            DOCKER_IMAGE = "${DOCKER_REPOSITORY}:build-${BUILD_NUMBER}"
@@ -17,7 +17,7 @@ pipeline {
    stages {
          stage("dockerize") {
             steps {
-                dir(${PROJECT}){
+                dir("${PROJECT}"){
                     withCredentials([usernamePassword(credentialsId: 'aliyun', passwordVariable: 'password', usernameVariable: 'username')]) {
                             sh 'echo ${password} |sudo docker login --username=${username}  registry.cn-chengdu.aliyuncs.com --password-stdin'
                             sh 'sudo docker build -t ${DOCKER_IMAGE} .'
