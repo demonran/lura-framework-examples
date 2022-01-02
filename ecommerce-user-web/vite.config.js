@@ -34,8 +34,7 @@ export default defineConfig({
 
     resolve: {
         alias: {
-            // 键必须以斜线开始和结束
-             '@': path.resolve(__dirname, './src')
+            "@": "/src",
             // '/@components/': path.resolve(__dirname, './src/components')
         },
         // 忽略后缀名的配置选项, 添加 .vue 选项时要记得原本默认忽略的选项也要手动写入

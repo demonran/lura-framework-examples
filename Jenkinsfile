@@ -16,7 +16,7 @@ pipeline {
    stages {
          stage("dockerize") {
             steps {
-                dir("${PROJECT}"){
+                dir("${params.project}"){
                     withCredentials([usernamePassword(credentialsId: 'aliyun', passwordVariable: 'password', usernameVariable: 'username')]) {
                             sh 'echo ${password} |sudo docker login --username=${username}  registry.cn-chengdu.aliyuncs.com --password-stdin'
                             sh 'sudo docker build -t ${DOCKER_IMAGE} .'

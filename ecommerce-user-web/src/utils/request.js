@@ -19,6 +19,8 @@ service.interceptors.response.use(response => {
     return Promise.reject(error)
 })
 
+export default service
+
 export  function request(options) {
     let { data, url, method = 'get' } = options
     const cloneData = cloneDeep(data)
@@ -65,12 +67,11 @@ const gen = params => {
     }
 }
 
-const apiGen = (api) => {
+export function apiGen(api) {
     const APIFunction = {}
     for (const key in api) {
         APIFunction[key] = gen(api[key])
     }
     return APIFunction
 }
-export default apiGen
 

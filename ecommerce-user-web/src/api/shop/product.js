@@ -1,4 +1,4 @@
-import apiGen from "../../utils/request.js";
+import {apiGen} from "../../utils/request.js";
 
 const url = '/product'
 const api = {
