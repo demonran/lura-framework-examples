@@ -4,27 +4,15 @@ import { cloneDeep, isEmpty } from 'lodash'
 import { parse, compile }  from "path-to-regexp"
 // 创建axios实例
 
-const service = axios.create({
-    baseURL: '/api', // api 的 base_url
-    timeout: 30000 // 请求超时时间
-})
+axios.defaults.baseURL = '/api'
+axios.defaults.timeout = 30000
 
-service.interceptors.response.use(response => {
-    return response.data
-}, error => {
-    ElNotification.error({
-        title: '系统异常，请联系管理员',
-        duration: 5000
-    })
-    return Promise.reject(error)
-})
 
-export default service
+export default axios
 
-export  function request(options) {
+export  function request(options, service) {
     let { data, url, method = 'get' } = options
     const cloneData = cloneDeep(data)
-
     try {
         const match = parse(url)
         url = compile(url)(data)
@@ -48,10 +36,9 @@ export  function request(options) {
 
 
 
-const gen = params => {
+const gen = (params, service) => {
     let url = params
     let method = 'get'
-
     const paramsArray = params.split(' ')
     if (paramsArray.length === 2) {
         method = paramsArray[0]
@@ -63,14 +50,14 @@ const gen = params => {
             url,
             method,
             data
-        })
+        }, service)
     }
 }
 
-export function apiGen(api) {
+export function apiGenerate(api, service) {
     const APIFunction = {}
     for (const key in api) {
-        APIFunction[key] = gen(api[key])
+        APIFunction[key] = gen(api[key], service)
     }
     return APIFunction
 }

@@ -1,4 +1,4 @@
-import {apiGen} from "../../utils/request.js";
+import {apiGen} from "./service.js";
 
 const url = '/auth/business'
 const api = {

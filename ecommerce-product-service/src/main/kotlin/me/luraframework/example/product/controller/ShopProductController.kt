@@ -1,5 +1,7 @@
 package me.luraframework.example.product.controller
 
+import io.luraframework.security.model.BusinessJwtUser
+import me.luraframework.example.product.config.BusinessUser
 import me.luraframework.example.product.model.Product
 import me.luraframework.example.product.service.ProductService
 import me.luraframework.example.product.service.ShopProductService
@@ -23,28 +25,28 @@ class ShopProductController(
   private val logger:Logger = LoggerFactory.getLogger(ShopProductController::class.java)
 
   @GetMapping("{id}")
-  fun query(@PathVariable id: Long, shopId: Long): Product? {
+  fun query(@PathVariable id: Long, @BusinessUser user: BusinessJwtUser): Product? {
     logger.info("product's id is $id")
-    return productService.findByIdAndShopId(id, shopId)
+    return productService.findByIdAndShopId(id, user.id)
   }
 
   @GetMapping
-  fun list(): List<Product> {
-    return productService.findAll();
+  fun list(@BusinessUser user: BusinessJwtUser): List<Product> {
+    return productService.findAll(user.id);
   }
 
   @PostMapping
-  fun createProduct(@RequestBody product: Product): Product {
-    return productService.save(product)
+  fun createProduct(@RequestBody product: Product, @BusinessUser user: BusinessJwtUser): Product {
+    return productService.save(product, user.id)
   }
 
-  @PutMapping("{id}")
-  fun updateProduct(@PathVariable id: Long, @RequestBody product: Product):Product {
-    return productService.update(id, product);
+  @PutMapping("{id}", )
+  fun updateProduct(@PathVariable id: Long, @RequestBody product: Product, @BusinessUser user: BusinessJwtUser):Product {
+    return productService.update(id, product, user.id);
   }
 
   @DeleteMapping("{id}")
-  fun deleteProduct(@PathVariable id: Long) {
-    productService.delete(id)
+  fun deleteProduct(@PathVariable id: Long, @BusinessUser user: BusinessJwtUser) {
+    productService.delete(id, user.id)
   }
 }

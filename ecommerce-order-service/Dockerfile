@@ -7,7 +7,7 @@ WORKDIR /app
 ADD . /app
 
 # use BuildKit
-RUN --mount=type=cache,target=/root/.gradle,id=my_gradle_module,sharing=shared gradle :ecommerce-order-service:build
+RUN --mount=type=cache,target=/root/.gradle,id=my_gradle_module,sharing=locked gradle :ecommerce-order-service:build
 # Stage: 2
 FROM openjdk:8-jre
 

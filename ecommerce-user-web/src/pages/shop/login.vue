@@ -32,13 +32,13 @@ export default {
   name: "login",
   setup() {
     const {login} = {...Auth}
-    const route = useRouter()
+    const router = useRouter()
 
     const form = reactive({username: '', password: ''})
     const handleLogin = () => {
       login(form).then(res => {
         localStorage.setItem("token", res)
-        route.push('/shop')
+        router.push('/shop')
       })
     }
 

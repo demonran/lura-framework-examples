@@ -10,36 +10,35 @@ class ShopProductService(
   private val productRepository: ProductRepository
 ) {
 
-  fun findAll(): List<Product> {
-    return productRepository.findAll();
+  fun findAll(shopId: Long): List<Product> {
+    return productRepository.findByShopId(shopId);
   }
 
-  fun save(product: Product): Product {
-    return productRepository.save(product)
+  fun save(product: Product, shopId: Long): Product {
+    return productRepository.save(product.copy(shopId = shopId))
   }
 
   fun findByIdAndShopId(id: Long, shopId: Long): Product? {
     return productRepository.findByIdAndShopId(id, shopId)
   }
 
-  fun update(id: Long, resource: Product): Product {
-    val productInDb = productRepository.findById(id)
-      .orElseThrow { RuntimeException() }
+  fun update(id: Long, resource: Product, shopId: Long): Product {
+    val productInDb = productRepository.findByIdAndShopId(id, shopId) ?: throw RuntimeException()
 
     val newProduct = productInDb.copy(
       name = resource.name,
       intro = resource.intro,
       price = resource.price,
       status = resource.status,
-      stock =  resource.stock,
+      stock = resource.stock,
       cover = resource.cover
     )
 
     return productRepository.save(newProduct)
   }
 
-  fun delete(id: Long) {
-    productRepository.deleteById(id)
+  fun delete(id: Long, shopId: Long) {
+    productRepository.deleteByIdAndShopId(id, shopId)
   }
 
 

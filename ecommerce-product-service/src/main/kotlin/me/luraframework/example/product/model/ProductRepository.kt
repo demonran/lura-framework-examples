@@ -6,5 +6,9 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ProductRepository: JpaRepository<Product, Long> {
 
-  fun findByIdAndShopId(id: Long, shopId:Long): Product
+  fun findByIdAndShopId(id: Long, shopId:Long): Product?
+
+  fun findByShopId(shopId: Long): List<Product>
+
+  fun deleteByIdAndShopId(id: Long, shopId: Long)
 }
