@@ -9,7 +9,7 @@ spec:
         paths:
           - backend:
               serviceName: ${PROJECT}-svc
-              servicePort: 80
+              servicePort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -33,12 +33,17 @@ spec:
       containers:
         - name: ${PROJECT}
           image: registry.cn-chengdu.aliyuncs.com/lura/${PROJECT}:build-${BUILD_NUMBER}
+          env:
+          - name: SPRING_CLOUD_NACOS_DISCOVERY_SERVERADDR
+            value: 192.168.31.110
+          - name: DB_HOST
+            value: 192.168.31.110
           resources:
             limits:
               cpu: "0.5"
               memory: "512Mi"
           ports:
-            - containerPort: 80
+            - containerPort: ${PORT}
               protocol: TCP
           imagePullPolicy: IfNotPresent
 #      tolerations:
@@ -55,8 +60,8 @@ metadata:
     app: ${PROJECT}-svc
 spec:
   ports:
-    - port: 80
-      targetPort: 80
+    - port: ${PORT}
+      targetPort: 8080
   selector:
     app: ${PROJECT}
   type: NodePort
