@@ -4,7 +4,6 @@ WORKDIR /app
 # 只要 package.json 不修改就会用 docker cache
 COPY package.json /app
 RUN --mount=type=cache,target=/app/node_modules,id=my_app_npm_module,sharing=locked \
-    --mount=type=cache,target=/root/.npm,id=npm_cache \
       yarn install --registry=https://registry.npm.taobao.org/
 
 ADD . /app

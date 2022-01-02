@@ -5,7 +5,7 @@ import { parse, compile }  from "path-to-regexp"
 // 创建axios实例
 
 const service = axios.create({
-    baseURL: '/', // api 的 base_url
+    baseURL: '/api', // api 的 base_url
     timeout: 30000 // 请求超时时间
 })
 
