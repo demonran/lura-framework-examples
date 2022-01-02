@@ -1,6 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.plugin.spring'
+    id 'org.springframework.boot'
 }
 
 group 'me.luraframework.examples'
@@ -9,6 +10,10 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenLocal()
     mavenCentral()
+}
+
+bootJar {
+    version ''
 }
 
 dependencies {

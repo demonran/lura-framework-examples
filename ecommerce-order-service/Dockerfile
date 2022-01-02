@@ -7,11 +7,11 @@ WORKDIR /app
 ADD . /app
 
 # use BuildKit
-RUN --mount=type=cache,target=/root/.gradle,id=my_gradle_module,sharing=shared gradle :ecommerce-product-service:build
+RUN --mount=type=cache,target=/root/.gradle,id=my_gradle_module,sharing=shared gradle :ecommerce-order-service:build
 # Stage: 2
 FROM openjdk:8-jre
 
-COPY --from=builder /app/ecommerce-product-service/build/libs/ecommerce-product-service.jar /app.jar
+COPY --from=builder /app/ecommerce-order-service/build/libs/ecommerce-order-service.jar /app.jar
 
 ENV profile=dev
 

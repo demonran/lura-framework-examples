@@ -1,6 +1,6 @@
 def project
 def host
-def targetPort
+def port
 pipeline {
    agent any
     parameters {
@@ -22,7 +22,7 @@ pipeline {
                  script {
                      project = "${params.project}".split(":")[0]
                      host = "${params.project}".split(":")[1]
-                     targetPort = "${params.project}".split(":")[2]
+                     port = "${params.project}".split(":")[2]
                  }
              }
           }
@@ -44,8 +44,8 @@ pipeline {
 
           stage('Deploy') {
               steps {
-                  sh "export PROJECT=${project};export HOST=${host};export PORT={port}; envsubst < deployment.yml"
-                  sh "export PROJECT=${project};export HOST=${host};export PORT={port}; envsubst < deployment.yml | sudo kubectl apply -f -"
+                  sh "export PROJECT=${project};export HOST=${host};export PORT=${port}; envsubst < deployment.yml"
+                  sh "export PROJECT=${project};export HOST=${host};export PORT=${port}; envsubst < deployment.yml | sudo kubectl apply -f -"
              }
           }
      }
