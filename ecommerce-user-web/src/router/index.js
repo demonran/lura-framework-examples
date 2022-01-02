@@ -22,15 +22,27 @@ const routes = [
     {
         path: '/shop',
         name: 'Shop',
-        component: () => import('@/layout/shop/shop-layout.vue'),
+        component: () => import('../layout/shop/index.vue'),
         children: [{
             path: 'login',
             name: 'ShopLogin',
-            component: () => import('@/pages/shop/login.vue'),
+            component: () => import('../pages/shop/login.vue'),
         },{
-            path: 'product',
-            name: 'ShopProduct',
-            component: () => import('@/pages/shop/product/index.vue'),
+            path: '',
+            name: 'ShopLayout',
+            component: () => import('../layout/shop/MainLayout.vue'),
+            children: [
+                {
+                    path: '',
+                    name: 'ShopIndex',
+                    component: () => import('../pages/shop/index.vue'),
+                },
+                {
+                    path: 'product',
+                    name: 'ShopProduct',
+                    component: () => import('../pages/shop/product/index.vue'),
+                }
+            ]
         },
         ]
     },

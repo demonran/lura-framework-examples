@@ -34,8 +34,7 @@ export default {
     const {login} = {...Auth}
     const route = useRouter()
 
-    const form = reactive({})
-
+    const form = reactive({username: '', password: ''})
     const handleLogin = () => {
       login(form).then(res => {
         localStorage.setItem("token", res)
@@ -45,15 +44,10 @@ export default {
 
     return {
       form,
-      handleLogin
+      handleLogin,
+      Background
     }
-  },
-
-  data() {
-    return {
-      Background: Background,
-    }
-  },
+  }
 }
 </script>
 
