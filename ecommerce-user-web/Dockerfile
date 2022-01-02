@@ -3,7 +3,7 @@ WORKDIR /app
 # 提前安装依赖， 避免每次安装依赖花很久时间
 # 只要 package.json 不修改就会用 docker cache
 COPY package.json /app
-RUN yarn install
+RUN yarn install --registry=https://registry.npm.taobao.org/
 
 ADD . /app
 RUN yarn build
