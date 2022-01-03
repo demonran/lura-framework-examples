@@ -37,7 +37,7 @@ export default {
     const form = reactive({username: '', password: ''})
     const handleLogin = () => {
       login(form).then(res => {
-        localStorage.setItem("token", res)
+        localStorage.setItem("shopToken", res)
         router.push('/shop')
       })
     }

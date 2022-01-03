@@ -1,11 +1,10 @@
 <template>
-  <el-row>
-    <el-col :span="1">
-    </el-col>
-    <el-col :span="23">
-      <app-main></app-main>
-    </el-col>
-  </el-row>
+  <el-container class="main-container">
+    <el-header></el-header>
+    <el-main class="main-wrapper">
+      <router-view></router-view>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -17,6 +16,16 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.el-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  .el-main {
+    width: 1266px;
+    flex-shrink: 0;
+  }
+}
 
 </style>

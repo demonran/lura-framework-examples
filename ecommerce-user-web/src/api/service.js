@@ -1,7 +1,7 @@
-import service, {apiGenerate} from "../../utils/request.js";
+import service, {apiGenerate} from "../utils/request.js";
 import axios from "axios";
 import {ElNotification} from "element-plus";
-import router from "../../router/index.js";
+import router from "../router/index.js";
 
 
 service.interceptors.request.use(
@@ -21,7 +21,7 @@ axios.interceptors.response.use(response => {
 }, error => {
     let code = error.response.data.status
     if (code === 401) {
-        return router.push(`/shop/login`)
+        return router.push(`/login`)
     }else {
         ElNotification.error({
             title: '系统异常，请联系管理员',
@@ -35,7 +35,7 @@ axios.interceptors.response.use(response => {
 
 
 function getToken() {
-    return localStorage.getItem("shopToken")
+    return localStorage.getItem("token")
 }
 
 export function apiGen(api) {
