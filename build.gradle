@@ -8,6 +8,7 @@ version '1.0-SNAPSHOT'
 
 subprojects {
   repositories {
+    mavenLocal()
     mavenCentral()
     maven {
       url 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
