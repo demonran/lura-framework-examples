@@ -19,7 +19,7 @@
   </div>
   <el-dialog :model-value="buy">
     <div>
-      <el-input-number></el-input-number>
+      <el-input-number model-value="count"></el-input-number>
       <el-button @click="createOrder">确认</el-button>
     </div>
 
@@ -36,9 +36,10 @@ import OrderApi from '../../../api/order.js'
 const route = useRoute()
 const {get} = {...productApi}
 const {add: addOrder} = {...OrderApi}
-const product = reactive({id: undefined})
-const orderParams = reactive({count: 1, productId: undefined})
+const product = reactive({id: undefined, shopId: undefined})
+const orderParams = reactive({orderItems: [], shopId: undefined})
 const buy = ref(false)
+const count = ref(1)
 
 onMounted(() => {
   const productId = route.params.id
@@ -46,7 +47,9 @@ onMounted(() => {
 })
 
 const createOrder = () => {
-  orderParams.productId = product.id
+  orderParams.shopId = product.shopId
+  orderParams.orderItems = []
+  orderParams.orderItems.push({productId: product.id, count: count.value})
   addOrder(orderParams).then(res => {
     buy.value = false
   })

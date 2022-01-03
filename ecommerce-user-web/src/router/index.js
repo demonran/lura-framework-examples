@@ -21,12 +21,11 @@ const routes = [
             path: '/',
             name: 'home',
             component: () => import(/* webpackChunkName: "login" */ '@/pages/home.vue'),
-        },
-            {
-                path: '/product/detail/:id',
-                name: 'productDetail',
-                component: () => import(/* webpackChunkName: "login" */ '../pages/customer/product/detail.vue'),
-            }]
+        }, {
+            path: '/product/detail/:id',
+            name: 'productDetail',
+            component: () => import(/* webpackChunkName: "login" */ '../pages/customer/product/detail.vue'),
+        }]
     },
 
     {
@@ -37,21 +36,23 @@ const routes = [
             path: 'login',
             name: 'ShopLogin',
             component: () => import('../pages/shop/login.vue'),
-        },{
+        }, {
             path: '',
             name: 'ShopLayout',
             component: () => import('../layout/shop/MainLayout.vue'),
-            children: [
-                {
-                    path: '',
-                    name: 'ShopIndex',
-                    component: () => import('../pages/shop/index.vue'),
-                },
-                {
-                    path: 'product',
-                    name: 'ShopProduct',
-                    component: () => import('../pages/shop/product/index.vue'),
-                }
+            children: [{
+                path: '',
+                name: 'ShopIndex',
+                component: () => import('../pages/shop/index.vue'),
+            }, {
+                path: 'product',
+                name: 'ShopProduct',
+                component: () => import('../pages/shop/product/index.vue'),
+            }, {
+                path: 'order',
+                name: 'ShopOrder',
+                component: () => import('../pages/shop/order/index.vue'),
+            }
             ]
         },
         ]

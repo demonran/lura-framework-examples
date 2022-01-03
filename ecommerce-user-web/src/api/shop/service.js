@@ -1,8 +1,12 @@
-import service, {apiGenerate} from "../../utils/request.js";
+import {apiGenerate} from "../../utils/request.js";
 import axios from "axios";
 import {ElNotification} from "element-plus";
 import router from "../../router/index.js";
 
+const service = axios.create({
+    baseURL: '/api',
+    timeout: 3000
+})
 
 service.interceptors.request.use(
     config => {
@@ -16,7 +20,7 @@ service.interceptors.request.use(
     }
 )
 
-axios.interceptors.response.use(response => {
+service.interceptors.response.use(response => {
     return response.data
 }, error => {
     let code = error.response.data.status

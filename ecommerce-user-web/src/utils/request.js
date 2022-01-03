@@ -27,7 +27,9 @@ export  function request(options, service) {
     }
 
     options.url = url
-    options.params = cloneData
+    if (method === 'get ') {
+        options.params = cloneData;
+    }
     options.method = method
     console.log(options)
     return service(options)

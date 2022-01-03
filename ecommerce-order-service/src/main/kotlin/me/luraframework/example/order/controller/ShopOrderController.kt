@@ -1,7 +1,7 @@
 package me.luraframework.example.order.controller
 
 import io.luraframework.security.annotation.UserContext
-import io.luraframework.security.model.CustomerJwtUser
+import io.luraframework.security.model.BusinessJwtUser
 import me.luraframework.example.order.OrderService
 import me.luraframework.example.order.command.CreateOrderCommand
 import me.luraframework.example.order.model.Order
@@ -15,19 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("order")
-class CustomerOrderController(
+@RequestMapping("shop/order")
+class ShopOrderController(
   val orderService: OrderService
 ) {
-  private val logger: Logger = LoggerFactory.getLogger(CustomerOrderController::class.java)
+  private val logger: Logger = LoggerFactory.getLogger(ShopOrderController::class.java)
 
   @GetMapping("{id}")
-  fun getOrder(@PathVariable id: Long): Order {
-    return orderService.findById(id);
+  fun getOrder(@PathVariable id: Long, @UserContext jwtUser: BusinessJwtUser): Order {
+    return orderService.findById(id, jwtUser.id);
   }
 
-  @PostMapping
-  fun createOrder(@RequestBody command: CreateOrderCommand, @UserContext jwtUser: CustomerJwtUser): Order {
-    return orderService.createOrder(command, jwtUser.id)
+  @GetMapping
+  fun listOrder( @UserContext jwtUser: BusinessJwtUser): List<Order> {
+    return orderService.findByShopId(jwtUser.id);
   }
+
+
 }
