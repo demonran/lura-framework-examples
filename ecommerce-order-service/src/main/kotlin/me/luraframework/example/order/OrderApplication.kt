@@ -1,22 +1,22 @@
 package me.luraframework.example.order
 
-import com.plumelog.http.restTemplate.PlumelogRestTemplateInterceptor
-import me.luraframework.boot.LuraFramework
+import me.luraframework.boot.LuraBootApplication
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.boot.runApplication
 import org.springframework.cloud.client.loadbalancer.LoadBalanced
+import org.springframework.cloud.openfeign.EnableFeignClients
 import org.springframework.context.annotation.Bean
 import org.springframework.web.client.RestTemplate
 
-@LuraFramework
+@LuraBootApplication
+@EnableFeignClients
 class Application {
 
   @Bean
   @LoadBalanced
   fun restTemplate(): RestTemplate {
     val restTemplate = RestTemplate()
-    restTemplate.interceptors.add(PlumelogRestTemplateInterceptor())
     return restTemplate
   }
 }

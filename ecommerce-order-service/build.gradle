@@ -2,6 +2,8 @@ plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.plugin.spring'
     id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'org.jetbrains.kotlin.plugin.jpa'
 }
 
 group 'me.luraframework.examples'
@@ -17,11 +19,15 @@ bootJar {
 }
 
 dependencies {
-    implementation 'me.luraframework:lura-framework-spring-boot-starter:1.0-SNAPSHOT'
+    implementation('io.github.luraframework:lura-framework-spring-boot-starter:0.0.2-SNAPSHOT'){ changing = true }
+    implementation('io.github.luraframework:lura-framework-security-core:0.0.2-SNAPSHOT'){ changing = true }
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-    implementation 'com.plumelog:plumelog-logback:3.5.1'
-    implementation 'com.plumelog:plumelog-trace:3.5.1'
-    implementation 'com.plumelog:plumelog-http:3.5.1'
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+//    implementation 'com.plumelog:plumelog-logback:3.5.1'
+//    implementation 'com.plumelog:plumelog-trace:3.5.1'
+//    implementation 'com.plumelog:plumelog-http:3.5.1'
+    runtimeOnly("mysql:mysql-connector-java")
 }
 
 compileKotlin {
