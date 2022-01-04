@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import OrderApi from '@/api/shop/order.js'
+import OrderApi from '@/api/order.js'
 import udOperation from '@/components/crud/UD.operation.vue'
 import {useCrudProvider} from "../../../components/crud/crud.js";
 import crudOperation from "../../../components/crud/CRUD.operation.vue"

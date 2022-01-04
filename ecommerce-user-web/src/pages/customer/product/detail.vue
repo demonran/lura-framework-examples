@@ -1,5 +1,5 @@
 <template>
-  <p>商品详情</p>
+  <p>商品详情1</p>
   <div>
     <div class="intro">
       <div class="intro-lf">

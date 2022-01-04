@@ -48,5 +48,9 @@ class OrderService(
     return orderRepository.findByShopId(shopId)
   }
 
+  fun findByCustomerId(customerId: Long): List<Order> {
+    return orderRepository.findByCustomerId(customerId)
+  }
+
 
 }

@@ -8,4 +8,6 @@ interface OrderRepository: JpaRepository<Order, Long> {
 
   fun findByShopId(shopId: Long):List<Order>
 
+  fun findByCustomerId(customerId: Long): List<Order>
+
 }

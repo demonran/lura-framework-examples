@@ -23,8 +23,12 @@ const routes = [
             component: () => import(/* webpackChunkName: "login" */ '@/pages/home.vue'),
         }, {
             path: '/product/detail/:id',
-            name: 'productDetail',
+            name: 'ProductDetail',
             component: () => import(/* webpackChunkName: "login" */ '../pages/customer/product/detail.vue'),
+        }, {
+            path: '/order',
+            name: 'Order',
+            component: () => import(/* webpackChunkName: "login" */ '../pages/customer/order/index.vue'),
         }]
     },
 

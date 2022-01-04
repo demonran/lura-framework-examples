@@ -26,6 +26,11 @@ class CustomerOrderController(
     return orderService.findById(id);
   }
 
+  @GetMapping
+  fun myOrder(@UserContext jwtUser: CustomerJwtUser): List<Order> {
+    return orderService.findByCustomerId(jwtUser.id);
+  }
+
   @PostMapping
   fun createOrder(@RequestBody command: CreateOrderCommand, @UserContext jwtUser: CustomerJwtUser): Order {
     return orderService.createOrder(command, jwtUser.id)

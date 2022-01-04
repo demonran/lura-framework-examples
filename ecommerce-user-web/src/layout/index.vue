@@ -1,31 +1,33 @@
 <template>
   <el-container class="main-container">
-    <el-header></el-header>
-    <el-main class="main-wrapper">
+    <el-header>
+      <nav-bar></nav-bar>
+    </el-header>
+    <el-main>
       <router-view></router-view>
     </el-main>
   </el-container>
 </template>
 
-<script>
-import AppMain from "./app-main.vue";
-export default {
-  name: "index",
-  components: {AppMain},
+<script setup>
+import NavBar from "./NavBar.vue";
 
-}
 </script>
 
 <style lang="scss" scoped>
 .el-container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
   .el-main {
+    margin: 0 auto;
     width: 1266px;
-    flex-shrink: 0;
+  }
+
+  .el-header {
+    background-color: #e3e4e5;
+    color: var(--el-text-color-primary);
+    text-align: center;
+    line-height: 60px;
   }
 }
+
 
 </style>

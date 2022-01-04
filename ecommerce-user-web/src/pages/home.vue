@@ -1,7 +1,7 @@
 <template>
   <h1>Home</h1>
   <div>
-    <p>商品列表</p>
+    <p>商品列表1</p>
     <el-row>
       <el-col :span="6" v-for="product in products" >
         <el-card shadow="hover" :body-style="{ padding: '0px'}" class="product-item" @click="toDetail(product.id)">
