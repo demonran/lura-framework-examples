@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ecommerce
+    password: password
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/ecommerce_order?allowPublicKeyRetrieval=true& createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf-8&useSSL=false
+server:
+  port: 8080
