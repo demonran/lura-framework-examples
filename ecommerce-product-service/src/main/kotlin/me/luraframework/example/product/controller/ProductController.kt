@@ -46,4 +46,14 @@ class ProductController(
   fun deleteProduct(@PathVariable id: Long) {
     productService.delete(id)
   }
+
+  @PutMapping("{id}/put-on")
+  fun putOnProducts(@PathVariable id: Long): Product {
+    return productService.putOn(id);
+  }
+
+  @PutMapping("{id}/put-off")
+  fun putOffProducts(@PathVariable id: Long): Product {
+    return productService.putOff(id);
+  }
 }
