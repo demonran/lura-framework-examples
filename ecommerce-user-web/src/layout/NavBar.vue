@@ -9,11 +9,19 @@
 
 <script setup>
 
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 const router = useRouter()
+const route = useRoute()
 
-const toOrder = () => router.push('/order')
+const toOrder = () => {
+  const currentPath = route.path
+  if (currentPath === '/order') {
+    location.reload()
+  }else {
+    router.push('/order');
+  }
+}
 
 </script>
 
