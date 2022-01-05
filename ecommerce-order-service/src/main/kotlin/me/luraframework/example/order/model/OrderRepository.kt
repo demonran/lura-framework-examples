@@ -10,4 +10,6 @@ interface OrderRepository: JpaRepository<Order, Long> {
 
   fun findByCustomerId(customerId: Long): List<Order>
 
+  fun findByIdAndCustomerId(id: Long, customerId: Long): Order?
+
 }

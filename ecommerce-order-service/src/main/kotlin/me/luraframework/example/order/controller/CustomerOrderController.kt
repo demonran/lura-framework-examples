@@ -4,6 +4,7 @@ import io.luraframework.security.annotation.UserContext
 import io.luraframework.security.model.CustomerJwtUser
 import me.luraframework.example.order.OrderService
 import me.luraframework.example.order.command.CreateOrderCommand
+import me.luraframework.example.order.command.PayOrderCommand
 import me.luraframework.example.order.model.Order
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("order")
+@RequestMapping("customer/order")
 class CustomerOrderController(
   val orderService: OrderService
 ) {
@@ -34,5 +35,10 @@ class CustomerOrderController(
   @PostMapping
   fun createOrder(@RequestBody command: CreateOrderCommand, @UserContext jwtUser: CustomerJwtUser): Order {
     return orderService.createOrder(command, jwtUser.id)
+  }
+
+  @PostMapping("{id}/payment")
+  fun payOrder(@PathVariable id: Long, @RequestBody command: PayOrderCommand, @UserContext jwtUser: CustomerJwtUser): Order {
+    return orderService.payOrder(id, jwtUser.id, command)
   }
 }

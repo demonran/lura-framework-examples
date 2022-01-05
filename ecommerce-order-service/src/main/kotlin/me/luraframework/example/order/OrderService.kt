@@ -1,7 +1,10 @@
 package me.luraframework.example.order
 
+import me.luraframework.commons.exception.AppException
 import me.luraframework.example.order.client.ProductClient
 import me.luraframework.example.order.command.CreateOrderCommand
+import me.luraframework.example.order.command.PayOrderCommand
+import me.luraframework.example.order.exception.OrderNotFoundException
 import me.luraframework.example.order.model.Order
 import me.luraframework.example.order.model.OrderItem
 import me.luraframework.example.order.model.OrderRepository
@@ -50,6 +53,12 @@ class OrderService(
 
   fun findByCustomerId(customerId: Long): List<Order> {
     return orderRepository.findByCustomerId(customerId)
+  }
+
+  fun payOrder(id: Long, customerId: Long, command: PayOrderCommand): Order {
+     val order = orderRepository.findByIdAndCustomerId(id, customerId) ?: throw OrderNotFoundException()
+    order.pay(command.payPrice)
+    return orderRepository.save(order)
   }
 
 

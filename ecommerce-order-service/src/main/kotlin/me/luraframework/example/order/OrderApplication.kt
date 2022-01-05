@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate
 
 @LuraBootApplication
 @EnableFeignClients
-class Application {
+class OrderApplication {
 
   @Bean
   @LoadBalanced
@@ -22,5 +22,5 @@ class Application {
 }
 
 fun main(args: Array<String>) {
-  runApplication<Application>(*args)
+  runApplication<OrderApplication>(*args)
 }

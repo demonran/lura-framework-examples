@@ -1,5 +1,6 @@
 package me.luraframework.example.order.model
 
+import me.luraframework.example.order.exception.PaidPriceNotSameWithOrderPriceException
 import java.math.BigDecimal
 import java.time.Instant
 import javax.persistence.CascadeType
@@ -16,29 +17,35 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "ecommerce_order")
-data class Order(
+class Order(orderItems: List<OrderItem>, shopId: Long, customerId: Long){
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  var id: Long?,
-  val customerId: Long,
-  val shopId: Long,
+  val id: Long? = null
+  val customerId: Long
+  val shopId: Long
   @OneToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE])
   @JoinColumn(name = "order_id")
-  val orderItems: List<OrderItem>,
-  val totalPrice: BigDecimal,
+  val orderItems: List<OrderItem>
+  val totalPrice: BigDecimal
+  val createdAt: Instant
   @Enumerated(EnumType.STRING)
-  val status: OrderStatus,
-  val createdAt: Instant,
-) {
-  constructor(orderItems: List<OrderItem>, shopId: Long, customerId: Long) : this(
-    id = null,
-    customerId = customerId,
-    shopId = shopId,
-    orderItems = orderItems,
-    totalPrice = orderItems.sumOf { it.itemPrice.multiply(BigDecimal(it.count)) },
-    status = OrderStatus.CREATED,
-    createdAt = Instant.now()
-  )
+  var status: OrderStatus
+
+  init {
+    this.customerId = customerId
+    this.shopId = shopId
+    this.orderItems = orderItems
+    this.createdAt = Instant.now()
+    this.status = OrderStatus.CREATED
+    this.totalPrice = orderItems.sumOf { it.itemPrice.multiply(BigDecimal(it.count)) }
+  }
+
+  fun pay(payPrice: Int) {
+    if (totalPrice.toInt() != payPrice) {
+      throw PaidPriceNotSameWithOrderPriceException(this.id!!);
+    }
+    this.status = OrderStatus.PAID
+  }
 }
 
 enum class OrderStatus {
