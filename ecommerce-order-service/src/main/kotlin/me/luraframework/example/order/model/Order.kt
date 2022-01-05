@@ -30,6 +30,7 @@ class Order(orderItems: List<OrderItem>, shopId: Long, customerId: Long){
   val createdAt: Instant
   @Enumerated(EnumType.STRING)
   var status: OrderStatus
+  var shipNumber: String?
 
   init {
     this.customerId = customerId
@@ -38,6 +39,7 @@ class Order(orderItems: List<OrderItem>, shopId: Long, customerId: Long){
     this.createdAt = Instant.now()
     this.status = OrderStatus.CREATED
     this.totalPrice = orderItems.sumOf { it.itemPrice.multiply(BigDecimal(it.count)) }
+    this.shipNumber = null
   }
 
   fun pay(payPrice: BigDecimal) {
@@ -46,8 +48,13 @@ class Order(orderItems: List<OrderItem>, shopId: Long, customerId: Long){
     }
     this.status = OrderStatus.PAID
   }
+
+  fun ship(shipNumber: String) {
+    this.shipNumber = shipNumber
+    this.status = OrderStatus.SHIPPED
+  }
 }
 
 enum class OrderStatus {
-  CREATED, PAID
+  CREATED, PAID, SHIPPED
 }

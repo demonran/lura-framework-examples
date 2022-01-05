@@ -39,7 +39,8 @@ export default {
 
   setup() {
     const ORDER_STATUS = {
-      CREATED: '待付款'
+      CREATED: '待付款',
+      PAID: '待发货'
     }
 
     const crud = useCrudProvider({crudMethod: {...OrderApi}});

@@ -4,6 +4,7 @@ import me.luraframework.commons.exception.AppException
 import me.luraframework.example.order.client.ProductClient
 import me.luraframework.example.order.command.CreateOrderCommand
 import me.luraframework.example.order.command.PayOrderCommand
+import me.luraframework.example.order.command.ShipOrderCommand
 import me.luraframework.example.order.exception.OrderNotFoundException
 import me.luraframework.example.order.model.Order
 import me.luraframework.example.order.model.OrderItem
@@ -56,8 +57,14 @@ class OrderService(
   }
 
   fun payOrder(id: Long, customerId: Long, command: PayOrderCommand): Order {
-     val order = orderRepository.findByIdAndCustomerId(id, customerId) ?: throw OrderNotFoundException()
+    val order = orderRepository.findByIdAndCustomerId(id, customerId) ?: throw OrderNotFoundException()
     order.pay(command.payPrice)
+    return orderRepository.save(order)
+  }
+
+  fun shipOrder(id: Long, shopId: Long, command: ShipOrderCommand): Order {
+    val order = orderRepository.findByIdAndShopId(id, shopId) ?: throw OrderNotFoundException()
+    order.ship(command.shipNumber)
     return orderRepository.save(order)
   }
 

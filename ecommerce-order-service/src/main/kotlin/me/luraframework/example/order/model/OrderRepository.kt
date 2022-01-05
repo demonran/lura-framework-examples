@@ -12,4 +12,6 @@ interface OrderRepository: JpaRepository<Order, Long> {
 
   fun findByIdAndCustomerId(id: Long, customerId: Long): Order?
 
+  fun findByIdAndShopId(id: Long, shopId: Long): Order?
+
 }

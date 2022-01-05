@@ -7,6 +7,7 @@ const api = {
     edit: `put ${url}/:id`,
     add: `post ${url}`,
     del: `delete ${url}/:id`,
+    ship: `post ${url}/:id/shipment`
 }
 
 export default apiGen(api)

@@ -4,6 +4,7 @@ import io.luraframework.security.annotation.UserContext
 import io.luraframework.security.model.BusinessJwtUser
 import me.luraframework.example.order.OrderService
 import me.luraframework.example.order.command.CreateOrderCommand
+import me.luraframework.example.order.command.ShipOrderCommand
 import me.luraframework.example.order.model.Order
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -29,6 +30,11 @@ class ShopOrderController(
   @GetMapping
   fun listOrder( @UserContext jwtUser: BusinessJwtUser): List<Order> {
     return orderService.findByShopId(jwtUser.id);
+  }
+
+  @PostMapping("{id}/shipment")
+  fun shipOrder(@PathVariable id: Long, @RequestBody command: ShipOrderCommand, @UserContext jwtUser: BusinessJwtUser): Order {
+    return orderService.shipOrder(id, jwtUser.id, command);
   }
 
 
