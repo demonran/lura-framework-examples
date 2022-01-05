@@ -24,7 +24,6 @@ import NavBar from "./NavBar.vue";
   .el-header {
     background-color: #e3e4e5;
     color: var(--el-text-color-primary);
-    text-align: center;
     line-height: 60px;
   }
 }

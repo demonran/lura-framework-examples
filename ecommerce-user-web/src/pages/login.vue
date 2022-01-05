@@ -25,7 +25,10 @@
 
 <script>
 import Background from '@/assets/background.jpg'
-import { login } from '@/api/login.js'
+import AuthApi from '@/api/auth.js'
+import {setUserInfo} from "../utils/user.js";
+
+const { login } = {...AuthApi}
 export default {
   name: "login",
   data() {
@@ -37,7 +40,7 @@ export default {
   methods: {
     handleLogin() {
       login(this.form).then(res => {
-        localStorage.setItem("token", res)
+        setUserInfo(res)
         this.$router.push('/')
       })
     }

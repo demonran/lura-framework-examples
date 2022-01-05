@@ -28,7 +28,9 @@
 
 <script>
 import Background from '@/assets/background.jpg'
-import { register } from '@/api/register.js'
+import AuthApi from '../api/auth.js'
+
+const {register} = {...AuthApi}
 export default {
   name: "register",
   data() {

@@ -2,6 +2,7 @@ import service, {apiGenerate} from "../utils/request.js";
 import axios from "axios";
 import {ElNotification} from "element-plus";
 import router from "../router/index.js";
+import {getToken} from "../utils/user.js";
 
 
 service.interceptors.request.use(
@@ -16,7 +17,7 @@ service.interceptors.request.use(
     }
 )
 
-axios.interceptors.response.use(response => {
+service.interceptors.response.use(response => {
     return response.data
 }, error => {
     let code = error.response.data.status
@@ -32,11 +33,6 @@ axios.interceptors.response.use(response => {
 
     return Promise.reject(error)
 })
-
-
-function getToken() {
-    return localStorage.getItem("token")
-}
 
 export function apiGen(api) {
     return apiGenerate(api, service)
