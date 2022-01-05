@@ -68,5 +68,11 @@ class OrderService(
     return orderRepository.save(order)
   }
 
+  fun receiptOrder(id: Long, shopId: Long): Order {
+    val order = orderRepository.findByIdAndShopId(id, shopId) ?: throw OrderNotFoundException()
+    order.receipt()
+    return orderRepository.save(order)
+  }
+
 
 }

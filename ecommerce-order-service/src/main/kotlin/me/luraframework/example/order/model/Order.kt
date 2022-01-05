@@ -53,8 +53,12 @@ class Order(orderItems: List<OrderItem>, shopId: Long, customerId: Long){
     this.shipNumber = shipNumber
     this.status = OrderStatus.SHIPPED
   }
+
+  fun receipt() {
+    this.status = OrderStatus.FINISHED
+  }
 }
 
 enum class OrderStatus {
-  CREATED, PAID, SHIPPED
+  CREATED, PAID, SHIPPED, FINISHED
 }

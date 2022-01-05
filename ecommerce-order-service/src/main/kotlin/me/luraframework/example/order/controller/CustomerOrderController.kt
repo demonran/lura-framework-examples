@@ -41,4 +41,9 @@ class CustomerOrderController(
   fun payOrder(@PathVariable id: Long, @RequestBody command: PayOrderCommand, @UserContext jwtUser: CustomerJwtUser): Order {
     return orderService.payOrder(id, jwtUser.id, command)
   }
+
+  @PostMapping("{id}/reception")
+  fun receiptOrder(@PathVariable id: Long, @UserContext jwtUser: CustomerJwtUser): Order {
+    return orderService.receiptOrder(id, jwtUser.id)
+  }
 }

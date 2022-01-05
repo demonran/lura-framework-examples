@@ -32,8 +32,6 @@
           <el-button v-if="order.status === 'PAID'" style="height: 20px" @click="toShip(order)">发货</el-button>
         </el-col>
       </el-row>
-
-
     </el-card>
   </div>
 </template>
