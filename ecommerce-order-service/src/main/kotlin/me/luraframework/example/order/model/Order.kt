@@ -40,8 +40,8 @@ class Order(orderItems: List<OrderItem>, shopId: Long, customerId: Long){
     this.totalPrice = orderItems.sumOf { it.itemPrice.multiply(BigDecimal(it.count)) }
   }
 
-  fun pay(payPrice: Int) {
-    if (totalPrice.toInt() != payPrice) {
+  fun pay(payPrice: BigDecimal) {
+    if (totalPrice.toDouble() != payPrice.toDouble()) {
       throw PaidPriceNotSameWithOrderPriceException(this.id!!);
     }
     this.status = OrderStatus.PAID

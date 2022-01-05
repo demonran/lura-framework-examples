@@ -102,7 +102,8 @@ export function useCrudProvider(options)  {
         submitCU,
         doDelete,
         data,
-        form
+        form,
+        refresh
     })
     provide('crud', crud)
     return crud
