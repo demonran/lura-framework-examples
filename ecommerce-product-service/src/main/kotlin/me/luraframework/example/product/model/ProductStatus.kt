@@ -1,6 +1,5 @@
-package me.luraframework.example.product.model;
+package me.luraframework.example.product.model
 
-public enum ProductStatus {
-    PUT_ON,
-    PUT_OFF
+enum class ProductStatus {
+    PUT_ON, PUT_OFF
 }
